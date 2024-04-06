@@ -15,6 +15,8 @@ int main() {
     t.Add(14);
     t.Add(13);
 
+    t.Print();
+
     bool b;
     b = t.Find(6);
     b = t.Find(26);

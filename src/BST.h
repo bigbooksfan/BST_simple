@@ -7,9 +7,11 @@ private:
         Node* right = nullptr;
         int val = 0;
     };
-public:
+
     Node* root = nullptr;
+public:
 
     void Add(int val);
     bool Find(int val);
+    void Print();
 };

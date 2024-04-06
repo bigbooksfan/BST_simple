@@ -1,5 +1,10 @@
 #include "BST.h"
 
+#include <queue>
+#include <iostream>
+#include <string>
+#include <cmath>
+
 void BST::Add(int val) {
     if (root == nullptr) {
         // add root node
@@ -67,5 +72,44 @@ bool BST::Find(int val) {
             }
             runner = runner->right;
         }
+    }
+}
+
+void BST::Print() {
+    std::queue<Node*> q;
+    int counter = 0;
+    int depth = 4;
+    int curr_row = 0;
+    std::string filler;
+    // BFS
+    q.push(root);
+    ++counter;
+    while(counter > 0) {
+        // add offset
+        int diff = depth - curr_row;
+        for (int i = 0, j = q.size(); i < j; ++i) {
+            filler.clear();
+            for (int n = 0; n < std::pow(2, diff - 1); ++n) {
+                filler += "\t";
+            }
+            Node* node = q.front();
+            q.pop();
+            if (node != nullptr) --counter;
+
+            if (node == nullptr) {
+                std::cout << "." << filler;
+                q.push(nullptr);
+                q.push(nullptr);
+            }
+            else {
+                std::cout << node->val << filler;
+                q.push(node->left);
+                if (node->left != nullptr) ++counter;
+                q.push(node->right);
+                if (node->right != nullptr) ++counter;
+            }
+        }
+        std::cout << std::endl;
+        ++curr_row;
     }
 }
