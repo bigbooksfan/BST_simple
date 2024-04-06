@@ -78,14 +78,13 @@ bool BST::Find(int val) {
 void BST::Print() {
     std::queue<Node*> q;
     int counter = 0;
-    int depth = 4;
+    int depth = GetDepth();
     int curr_row = 0;
     std::string filler;
     // BFS
     q.push(root);
     ++counter;
     while(counter > 0) {
-        // add offset
         int diff = depth - curr_row;
         for (int i = 0, j = q.size(); i < j; ++i) {
             filler.clear();
@@ -112,4 +111,33 @@ void BST::Print() {
         std::cout << std::endl;
         ++curr_row;
     }
+}
+
+int BST::GetSubtreeDepth(Node* node) {
+    // base case
+    if (node == nullptr) return 0;
+
+    int a = GetSubtreeDepth(node->left);
+    int b = GetSubtreeDepth(node->right);
+    return std::max(a, b) + 1;
+}
+
+int BST::GetDepth() {
+    return GetSubtreeDepth(root);
+}
+
+void BST::GetSubtreeElements(std::vector<int>& v, Node* node) {
+    // base case
+    if (node == nullptr) return;
+
+    GetSubtreeElements(v, node->left);
+    v.push_back(node->val);
+    GetSubtreeElements(v, node->right);
+}
+
+std::vector<int> BST::GetAllElements() {
+    std::vector<int> ret;
+
+    GetSubtreeElements(ret, root);
+    return ret;
 }

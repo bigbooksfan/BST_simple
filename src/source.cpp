@@ -1,19 +1,14 @@
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 #include "BST.h"
 
 int main() {
     BST t;
-    t.Add(8);
-    t.Add(3);
-    t.Add(10);
-    t.Add(1);
-    t.Add(6);
-    t.Add(4);
-    t.Add(7);
-    t.Add(14);
-    t.Add(13);
+    for (int i = 1; i <= 4; ++i) {
+        t.Add(i);
+    }
 
     t.Print();
 
@@ -21,5 +16,8 @@ int main() {
     b = t.Find(6);
     b = t.Find(26);
 
+    std::vector<int> v = t.GetAllElements();
+    for (int i : v) std::cout << i << " ";
+    std::cout << std::endl;
     return 0;
 }
