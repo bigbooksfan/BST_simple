@@ -7,6 +7,8 @@ set(FILES
     src/source.cpp
     src/BST.h
     src/BST.cpp
+    src/AVL.h
+    src/log_duration.h
 )
 
 add_executable(Tree ${FILES})
